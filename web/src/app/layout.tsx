@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://popclick.app"),
   title: "PopClick ✦ The Ultra-Modern macOS Text Action Launcher & AI Agent",
   description: "Native macOS floating text action launcher featuring PopClick AI Agent, 100% offline KaTeX LaTeX rendering, code intelligence with LCS Diff, and zero Electron bloat.",
   keywords: ["PopClick", "macOS", "PopClick AI Agent", "Text Selection", "Mac Productivity", "KaTeX", "Code Diff", "Swift", "AppKit"],

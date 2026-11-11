@@ -35,14 +35,14 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang }) => {
           <a href="#features" className="hover:text-white transition-colors">
             {t.features}
           </a>
-          <a href="#ai-agent" className="hover:text-white transition-colors">
+          <a href="#demo" className="hover:text-white transition-colors">
             {t.aiAgent}
           </a>
-          <a href="#code-math" className="hover:text-white transition-colors">
-            {t.codeMath}
+          <a href="#specs" className="hover:text-white transition-colors">
+            {t.performance}
           </a>
-          <a href="#comparison" className="hover:text-white transition-colors">
-            {t.comparison}
+          <a href="#download" className="hover:text-white transition-colors">
+            {lang === "en" ? "Download" : "下载"}
           </a>
           <a href="#faq" className="hover:text-white transition-colors">
             {t.faq}

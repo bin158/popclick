@@ -52,7 +52,7 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
               <ul className="space-y-2 text-neutral-400">
                 <li><a href="#features" className="hover:text-white transition-colors">Features</a></li>
                 <li><a href="#demo" className="hover:text-white transition-colors">Simulator</a></li>
-                <li><a href="#comparison" className="hover:text-white transition-colors">Comparison</a></li>
+                <li><a href="#specs" className="hover:text-white transition-colors">Specifications</a></li>
                 <li><a href="/downloads/PopClick.dmg" download className="text-blue-400 hover:text-blue-300 transition-colors">Download DMG</a></li>
               </ul>
             </div>

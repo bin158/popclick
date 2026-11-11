@@ -6,7 +6,7 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { InteractiveDemo } from "@/components/InteractiveDemo";
 import { Features } from "@/components/Features";
-import { Comparison } from "@/components/Comparison";
+import { Performance } from "@/components/Performance";
 import { DownloadSection } from "@/components/DownloadSection";
 import { FAQ } from "@/components/FAQ";
 import { Footer } from "@/components/Footer";
@@ -25,7 +25,7 @@ export default function Home() {
         <Hero lang={lang} />
         <InteractiveDemo lang={lang} />
         <Features lang={lang} />
-        <Comparison lang={lang} />
+        <Performance lang={lang} />
         <DownloadSection lang={lang} />
         <FAQ lang={lang} />
       </main>
