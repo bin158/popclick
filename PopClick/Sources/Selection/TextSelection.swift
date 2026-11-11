@@ -85,10 +85,13 @@ struct TextSelection {
             appName: context?.appName
         )
 
-        let ctx = context ?? CodeContext(
+        var ctx = context ?? CodeContext(
             selectedCode: text,
+            isCode: detection.isCode,
             detectedLanguage: detection.language
         )
+        ctx.isCode = detection.isCode
+        ctx.detectedLanguage = detection.language
 
         if detection.isCode {
             switch detection.language {

@@ -144,7 +144,7 @@ final class AccessibilityManager {
     public func extractCodeContext(for selectedText: String) -> CodeContext {
         guard let focusedApp = NSWorkspace.shared.frontmostApplication else {
             let detection = CodeDetector.detect(text: selectedText)
-            return CodeContext(selectedCode: selectedText, detectedLanguage: detection.language)
+            return CodeContext(selectedCode: selectedText, isCode: detection.isCode, detectedLanguage: detection.language)
         }
 
         let appName = focusedApp.localizedName
@@ -237,6 +237,7 @@ final class AccessibilityManager {
 
         return CodeContext(
             selectedCode: selectedText,
+            isCode: detection.isCode,
             surroundingBefore: surroundingBefore,
             surroundingAfter: surroundingAfter,
             fullFileContent: fullFile,

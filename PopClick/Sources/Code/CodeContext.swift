@@ -20,6 +20,7 @@ public struct CodeContext: Codable {
     }
 
     public let selectedCode: String
+    public var isCode: Bool
     public let surroundingBefore: String?
     public let surroundingAfter: String?
     public let fullFileContent: String?
@@ -31,11 +32,12 @@ public struct CodeContext: Codable {
     public var contextMode: ContextMode
 
     public var isLikelyCode: Bool {
-        return detectedLanguage != .generic || (fileExtension != nil && !fileExtension!.isEmpty) || (appName != nil && !appName!.isEmpty)
+        return isCode
     }
 
     public init(
         selectedCode: String,
+        isCode: Bool = false,
         surroundingBefore: String? = nil,
         surroundingAfter: String? = nil,
         fullFileContent: String? = nil,
@@ -47,6 +49,7 @@ public struct CodeContext: Codable {
         contextMode: ContextMode = .selectionOnly
     ) {
         self.selectedCode = selectedCode
+        self.isCode = isCode
         self.surroundingBefore = surroundingBefore
         self.surroundingAfter = surroundingAfter
         self.fullFileContent = fullFileContent
