@@ -1,0 +1,124 @@
+<svg width="1100" height="480" viewBox="0 0 1100 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="archBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+    <filter id="nodeShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000000" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="480" rx="16" fill="url(#archBg)" stroke="#ffffff" stroke-opacity="0.1" />
+
+  <text x="50" y="50" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="22" font-weight="700" fill="#ffffff">
+    ✦ System Architecture &amp; Data Pipeline
+  </text>
+  <text x="50" y="74" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="13" fill="#94a3b8">
+    Zero-polling, event-driven, 100% native Apple AppKit + SwiftUI execution flow
+  </text>
+
+  <!-- Layer 1: Selection Detection -->
+  <g filter="url(#nodeShadow)" transform="translate(50, 110)">
+    <rect width="210" height="320" rx="14" fill="url(#nodeGrad)" stroke="#38bdf8" stroke-opacity="0.4" stroke-width="1.2" />
+    <text x="20" y="32" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="700" fill="#38bdf8">1. Detection Layer</text>
+
+    <rect x="15" y="55" width="180" height="50" rx="8" fill="#1e293b" stroke="#ffffff" stroke-opacity="0.08" />
+    <text x="25" y="76" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">Global Mouse Tap</text>
+    <text x="25" y="94" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8">NSEvent.addGlobalMonitor</text>
+
+    <rect x="15" y="120" width="180" height="50" rx="8" fill="#1e293b" stroke="#ffffff" stroke-opacity="0.08" />
+    <text x="25" y="141" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">AX Selection Query</text>
+    <text x="25" y="159" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8">kAXSelectedTextAttribute</text>
+
+    <rect x="15" y="185" width="180" height="50" rx="8" fill="#1e293b" stroke="#ffffff" stroke-opacity="0.08" />
+    <text x="25" y="206" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">Coordinate Resolver</text>
+    <text x="25" y="224" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8">kAXBoundsForRangeParameterized</text>
+
+    <rect x="15" y="250" width="180" height="50" rx="8" fill="#1e293b" stroke="#ffffff" stroke-opacity="0.08" />
+    <text x="25" y="271" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">Semantic Classifier</text>
+    <text x="25" y="289" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8">URL/Code/JSON/Math/Email</text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <path d="M260 270 L300 270" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrow)" />
+
+  <!-- Layer 2: Floating HUD Layer -->
+  <g filter="url(#nodeShadow)" transform="translate(310, 110)">
+    <rect width="210" height="320" rx="14" fill="url(#nodeGrad)" stroke="#a855f7" stroke-opacity="0.4" stroke-width="1.2" />
+    <text x="20" y="32" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="700" fill="#a855f7">2. Floating UI Layer</text>
+
+    <rect x="15" y="55" width="180" height="50" rx="8" fill="#1e293b" stroke="#ffffff" stroke-opacity="0.08" />
+    <text x="25" y="76" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">Non-Activating NSPanel</text>
+    <text x="25" y="94" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8">.nonactivatingPanel</text>
+
+    <rect x="15" y="120" width="180" height="50" rx="8" fill="#1e293b" stroke="#ffffff" stroke-opacity="0.08" />
+    <text x="25" y="141" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">Liquid-Glass HUD</text>
+    <text x="25" y="159" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8">NSVisualEffectView + Border</text>
+
+    <rect x="15" y="185" width="180" height="50" rx="8" fill="#1e293b" stroke="#ffffff" stroke-opacity="0.08" />
+    <text x="25" y="206" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">Collision Avoidance</text>
+    <text x="25" y="224" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8">Multi-Display Edge Clamp</text>
+
+    <rect x="15" y="250" width="180" height="50" rx="8" fill="#1e293b" stroke="#ffffff" stroke-opacity="0.08" />
+    <text x="25" y="271" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">Spring Animations</text>
+    <text x="25" y="289" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8">SwiftUI withAnimation</text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <path d="M520 270 L560 270" stroke="#a855f7" stroke-width="2" stroke-dasharray="4 4" />
+
+  <!-- Layer 3: Processing & Rich Rendering -->
+  <g filter="url(#nodeShadow)" transform="translate(570, 110)">
+    <rect width="230" height="320" rx="14" fill="url(#nodeGrad)" stroke="#34d399" stroke-opacity="0.4" stroke-width="1.2" />
+    <text x="20" y="32" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="700" fill="#34d399">3. Processing &amp; Rich Math</text>
+
+    <rect x="15" y="55" width="200" height="60" rx="8" fill="#1e293b" stroke="#ffffff" stroke-opacity="0.08" />
+    <text x="25" y="76" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">KaTeX MathML Engine</text>
+    <text x="25" y="93" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8">100% Offline, Matrices, Ints</text>
+    <text x="25" y="106" font-family="ui-monospace, monospace" font-size="10" fill="#38bdf8">AutoSizing WKWebView</text>
+
+    <rect x="15" y="125" width="200" height="60" rx="8" fill="#1e293b" stroke="#ffffff" stroke-opacity="0.08" />
+    <text x="25" y="146" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">Code Highlight Engine</text>
+    <text x="25" y="163" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8">Highlight.js (20+ langs)</text>
+    <text x="25" y="176" font-family="ui-monospace, monospace" font-size="10" fill="#34d399">One-Click Copy Button</text>
+
+    <rect x="15" y="195" width="200" height="50" rx="8" fill="#1e293b" stroke="#ffffff" stroke-opacity="0.08" />
+    <text x="25" y="216" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">Multi-Provider AI Pool</text>
+    <text x="25" y="234" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8">DeepSeek, Gemini, OpenAI, Claude</text>
+
+    <rect x="15" y="255" width="200" height="50" rx="8" fill="#1e293b" stroke="#ffffff" stroke-opacity="0.08" />
+    <text x="25" y="276" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">Translation Engine</text>
+    <text x="25" y="294" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8">Multi-engine async pipeline</text>
+  </g>
+
+  <!-- Arrow 3 -> 4 -->
+  <path d="M800 270 L840 270" stroke="#34d399" stroke-width="2" stroke-dasharray="4 4" />
+
+  <!-- Layer 4: Execution & Replacement -->
+  <g filter="url(#nodeShadow)" transform="translate(850, 110)">
+    <rect width="200" height="320" rx="14" fill="url(#nodeGrad)" stroke="#f59e0b" stroke-opacity="0.4" stroke-width="1.2" />
+    <text x="20" y="32" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="700" fill="#f59e0b">4. Action Execution</text>
+
+    <rect x="15" y="55" width="170" height="50" rx="8" fill="#1e293b" stroke="#ffffff" stroke-opacity="0.08" />
+    <text x="25" y="76" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">Text Replacement</text>
+    <text x="25" y="94" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8">CGEvent ⌘V dispatch</text>
+
+    <rect x="15" y="120" width="170" height="50" rx="8" fill="#1e293b" stroke="#ffffff" stroke-opacity="0.08" />
+    <text x="25" y="141" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">Safe Clipboard Copy</text>
+    <text x="25" y="159" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8">NSPasteboard write/restore</text>
+
+    <rect x="15" y="185" width="170" height="50" rx="8" fill="#1e293b" stroke="#ffffff" stroke-opacity="0.08" />
+    <text x="25" y="206" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">JSON &amp; Transformers</text>
+    <text x="25" y="224" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8">Tolerant JSON formatter</text>
+
+    <rect x="15" y="250" width="170" height="50" rx="8" fill="#1e293b" stroke="#ffffff" stroke-opacity="0.08" />
+    <text x="25" y="271" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">Custom Plugins</text>
+    <text x="25" y="289" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8">JSON extensible scripts</text>
+  </g>
+</svg>

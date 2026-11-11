@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="katex.min.css">
+<script src="marked.umd.js"></script>
+<script src="katex.min.js"></script>
+<script src="highlight.min.js"></script>
+<style>
+  :root {
+    color-scheme: light dark;
+    --text-color: #1d1d1f;
+    --code-bg: rgba(0, 0, 0, 0.04);
+    --border-color: rgba(0, 0, 0, 0.10);
+    --accent-color: #007aff;
+    --pre-bg: rgba(0, 0, 0, 0.035);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text-color: #f5f5f7;
+      --code-bg: rgba(255, 255, 255, 0.08);
+      --border-color: rgba(255, 255, 255, 0.12);
+      --accent-color: #0a84ff;
+      --pre-bg: rgba(255, 255, 255, 0.05);
+    }
+  }
+  * {
+    box-sizing: border-box;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: transparent !important;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--text-color);
+    -webkit-font-smoothing: subpixel-antialiased;
+    user-select: text;
+    -webkit-user-select: text;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    word-break: break-word;
+  }
+  p {
+    margin: 0 0 0.5em 0;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0.7em 0 0.3em 0;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  h1:first-child, h2:first-child, h3:first-child {
+    margin-top: 0;
+  }
+  h1 { font-size: 1.22em; }
+  h2 { font-size: 1.12em; }
+  h3 { font-size: 1.05em; }
+  ul, ol {
+    margin: 0.3em 0 0.5em 0;
+    padding-left: 1.4em;
+  }
+  li {
+    margin-bottom: 0.2em;
+  }
+  li:last-child {
+    margin-bottom: 0;
+  }
+  code:not(pre code) {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 4px;
+    border: 0.5px solid var(--border-color);
+  }
+  blockquote {
+    border-left: 3px solid var(--accent-color);
+    margin: 0.4em 0;
+    padding: 2px 0 2px 8px;
+    color: rgba(128, 128, 128, 0.9);
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5em 0;
+    font-size: 12px;
+  }
+  th, td {
+    border: 0.5px solid var(--border-color);
+    padding: 5px 8px;
+    text-align: left;
+  }
+  th {
+    background: var(--code-bg);
+    font-weight: 600;
+  }
+  hr {
+    border: none;
+    border-top: 0.5px solid var(--border-color);
+    margin: 0.7em 0;
+  }
+  .katex {
+    font-size: 1.08em !important;
+    text-rendering: auto;
+  }
+  .katex-display {
+    margin: 0.5em 0 !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2px 0;
+  }
+  .popclick-katex-display {
+    display: block;
+    margin: 0.5em 0;
+    text-align: center;
+  }
+  .popclick-katex-inline {
+    display: inline;
+  }
+
+  /* Code Block Wrapper & Header */
+  .code-block-wrapper {
+    margin: 0.6em 0;
+    border-radius: 8px;
+    border: 0.5px solid var(--border-color);
+    background: var(--pre-bg);
+    overflow: hidden;
+  }
+  .code-block-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 12px;
+    background: rgba(0, 0, 0, 0.035);
+    border-bottom: 0.5px solid var(--border-color);
+    font-size: 11px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  @media (prefers-color-scheme: dark) {
+    .code-block-header {
+      background: rgba(255, 255, 255, 0.04);
+    }
+  }
+  .code-block-lang {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-size: 10.5px;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  .code-block-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: transparent;
+    border: 0.5px solid var(--border-color);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 10.5px;
+    color: var(--text-color);
+    cursor: pointer;
+    opacity: 0.75;
+    transition: all 0.15s ease;
+  }
+  .code-block-copy-btn:hover {
+    opacity: 1.0;
+    background: rgba(0, 0, 0, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    .code-block-copy-btn:hover {
+      background: rgba(255, 255, 255, 0.10);
+    }
+  }
+  .code-block-copy-btn.copied {
+    color: #34c759;
+    border-color: #34c759;
+    opacity: 1.0;
+  }
+  pre {
+    margin: 0 !important;
+    padding: 8px 12px !important;
+    border: none !important;
+    background: transparent !important;
+    overflow-x: auto;
+  }
+  pre code {
+    background: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  /* Apple-inspired Syntax Highlighting - Light */
+  .hljs-keyword, .hljs-selector-tag, .hljs-subst { color: #ad3da4; font-weight: 600; }
+  .hljs-string, .hljs-title, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type, .hljs-addition { color: #d12f1b; }
+  .hljs-comment, .hljs-quote, .hljs-deletion, .hljs-meta { color: #707f8d; font-style: italic; }
+  .hljs-number, .hljs-regexp, .hljs-link { color: #272ad8; }
+  .hljs-variable, .hljs-params { color: #3e8087; }
+  .hljs-built_in, .hljs-class .hljs-title { color: #4b21b0; font-weight: 500; }
+  .hljs-attr { color: #836c28; }
+  .hljs-symbol, .hljs-bullet { color: #1c00cf; }
+
+  /* Apple-inspired Syntax Highlighting - Dark */
+  @media (prefers-color-scheme: dark) {
+    .hljs-keyword, .hljs-selector-tag, .hljs-subst { color: #fc5fa3; font-weight: 600; }
+    .hljs-string, .hljs-title, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type, .hljs-addition { color: #fc6a5d; }
+    .hljs-comment, .hljs-quote, .hljs-deletion, .hljs-meta { color: #6c7986; font-style: italic; }
+    .hljs-number, .hljs-regexp, .hljs-link { color: #d0bf69; }
+    .hljs-variable, .hljs-params { color: #41a1c0; }
+    .hljs-built_in, .hljs-class .hljs-title { color: #a167e6; font-weight: 500; }
+    .hljs-attr { color: #e59074; }
+    .hljs-symbol, .hljs-bullet { color: #96e072; }
+  }
+</style>
+</head>
+<body>
+<div id="content"></div>
+<script>
+  function renderMarkdown(raw) {
+    let text = raw || '';
+    const mathBlocks = [];
+
+    function addMath(math, display) {
+      const id = mathBlocks.length;
+      mathBlocks.push({ math: math, display: display });
+      if (display) {
+        return `\n\n<div class="popclick-katex popclick-katex-display" data-id="${id}"></div>\n\n`;
+      } else {
+        return `<span class="popclick-katex popclick-katex-inline" data-id="${id}"></span>`;
+      }
+    }
+
+    // 1. Protect code blocks (```...```) and inline code (`...`)
+    const codeBlocks = [];
+    text = text.replace(/(```[\s\S]*?```|`[^`\n]+`)/g, (match) => {
+      const cid = codeBlocks.length;
+      codeBlocks.push(match);
+      return `%%POPCLICK_CODE_${cid}%%`;
+    });
+
+    // 2. Detect raw unquoted LaTeX block formulas (e.g. \int, \frac, \begin{...}, [a]_R = \{s \mid ...\})
+    const trimmed = text.trim();
+    const mathCommandPattern = /\\(int|sum|prod|frac|sqrt|pmatrix|bmatrix|vmatrix|Vmatrix|matrix|cases|aligned|align|equation|array|mathbb|mathbf|mathcal|mid|in|notin|subset|subseteq|cap|cup|forall|exists|infty|partial|nabla|alpha|beta|gamma|delta|theta|lambda|pi|sigma|omega|vec|lim|times|cdot|le|ge|neq|approx|equiv)/;
+
+    if (!text.includes('$') && !text.includes('\\(') && !text.includes('\\[') && mathCommandPattern.test(text)) {
+      if (!text.includes('\n\n') && (trimmed.startsWith('\\') || trimmed.includes('=') || trimmed.includes('_') || trimmed.includes('^'))) {
+        text = '$$\n' + trimmed + '\n$$';
+      }
+    }
+
+    // 3. Extract display math $$...$$
+    text = text.replace(/\$\$([\s\S]*?)\$\$/g, (m, math) => {
+      return addMath(math.trim(), true);
+    });
+
+    // 4. Extract display math \[...\]
+    text = text.replace(/\\\[([\s\S]*?)\\\]/g, (m, math) => {
+      return addMath(math.trim(), true);
+    });
+
+    // 5. Extract LaTeX environments without $$: \begin{...}...\end{...}
+    text = text.replace(/(\\begin\{(?:pmatrix|bmatrix|vmatrix|Vmatrix|matrix|cases|aligned|align\*?|equation\*?|gather\*?|array)\}[\s\S]*?\\end\{(?:pmatrix|bmatrix|vmatrix|Vmatrix|matrix|cases|aligned|align\*?|equation\*?|gather\*?|array)\})/g, (m, math) => {
+      return addMath(math.trim(), true);
+    });
+
+    // 6. Extract inline math \(...\)
+    text = text.replace(/\\\(([\s\S]*?)\\\)/g, (m, math) => {
+      return addMath(math.trim(), false);
+    });
+
+    // 7. Extract inline math $...$
+    text = text.replace(/\$([^\$\n]+?)\$/g, (m, math) => {
+      if (/^\s*\d+(?:\.\d+)?\s*$/.test(math)) {
+        return m;
+      }
+      return addMath(math.trim(), false);
+    });
+
+    // 7.5 Extract inline unquoted LaTeX formulas like \frac{a}{b}, \sqrt{x}, \alpha, etc.
+    text = text.replace(/(\\(?:frac\{[^{}]+\}\{[^{}]+\}|sqrt(?:\[[^\]]+\])?\{[^{}]+\}|(?:int|sum|prod)(?:_[^{\s]+|_\{\S+?\})?(?:\^[^{\s]+|\^\{\S+?\})?))/g, (m) => {
+      return addMath(m, false);
+    });
+
+    // 8. Restore code blocks
+    text = text.replace(/%%POPCLICK_CODE_(\d+)%%/g, (_, id) => {
+      return codeBlocks[parseInt(id, 10)] || '';
+    });
+
+    // 9. Parse Markdown with marked
+    const html = marked.parse(text);
+    const content = document.getElementById('content');
+    content.innerHTML = html;
+
+    // 10. Render all KaTeX placeholders
+    const placeholders = content.querySelectorAll('.popclick-katex');
+    placeholders.forEach(el => {
+      const id = parseInt(el.getAttribute('data-id'), 10);
+      const item = mathBlocks[id];
+      if (item) {
+        try {
+          katex.render(item.math, el, {
+            displayMode: item.display,
+            throwOnError: false
+          });
+        } catch (e) {
+          el.textContent = item.math;
+        }
+      }
+    });
+
+    // 11. Format and highlight all Code Blocks with Language Badge & Copy Button
+    const codeBlocksElements = content.querySelectorAll('pre code');
+    codeBlocksElements.forEach((codeEl) => {
+      const preEl = codeEl.parentElement;
+      if (!preEl || preEl.tagName !== 'PRE') return;
+
+      // Detect language
+      let lang = 'code';
+      const classes = (codeEl.className || '').split(/\s+/);
+      for (const cls of classes) {
+        if (cls.startsWith('language-')) {
+          lang = cls.replace('language-', '').toLowerCase();
+          break;
+        }
+      }
+
+      // Syntax highlight with Highlight.js
+      if (window.hljs) {
+        try {
+          hljs.highlightElement(codeEl);
+        } catch (e) {}
+      }
+
+      // Create code block wrapper
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-block-wrapper';
+
+      const header = document.createElement('div');
+      header.className = 'code-block-header';
+
+      const langSpan = document.createElement('span');
+      langSpan.className = 'code-block-lang';
+      langSpan.textContent = lang;
+
+      const copyBtn = document.createElement('button');
+      copyBtn.className = 'code-block-copy-btn';
+      copyBtn.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy';
+
+      copyBtn.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const codeText = codeEl.innerText || codeEl.textContent || '';
+
+        // Notify Swift host or navigator.clipboard
+        if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.copyHandler) {
+          window.webkit.messageHandlers.copyHandler.postMessage(codeText);
+        } else if (navigator.clipboard) {
+          navigator.clipboard.writeText(codeText);
+        }
+
+        copyBtn.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#34c759" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
+        copyBtn.classList.add('copied');
+        setTimeout(function() {
+          copyBtn.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy';
+          copyBtn.classList.remove('copied');
+        }, 1600);
+      };
+
+      header.appendChild(langSpan);
+      header.appendChild(copyBtn);
+
+      preEl.parentNode.insertBefore(wrapper, preEl);
+      wrapper.appendChild(header);
+      wrapper.appendChild(preEl);
+    });
+
+    // 12. Notify Swift of actual content height
+    function notifyHeight() {
+      const height = Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, content.offsetHeight));
+      if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.heightHandler) {
+        window.webkit.messageHandlers.heightHandler.postMessage(height);
+      }
+    }
+    notifyHeight();
+    setTimeout(notifyHeight, 60);
+  }
+
+  // Setup ResizeObserver to report height dynamically on window resize
+  if (window.ResizeObserver) {
+    const observer = new ResizeObserver(() => {
+      const content = document.getElementById('content');
+      if (content && window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.heightHandler) {
+        const height = Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, content.offsetHeight));
+        window.webkit.messageHandlers.heightHandler.postMessage(height);
+      }
+    });
+    observer.observe(document.body);
+  }
+</script>
+</body>
+</html>

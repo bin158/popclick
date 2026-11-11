@@ -1,0 +1,45 @@
+# macOS System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# Swift & Xcode Build Artifacts
+.build/
+*.build/
+*.app/
+*.dSYM/
+*.o
+*.pcm
+*.swiftmodule
+*.swiftdoc
+*.swiftinterface
+*.swiftsourceinfo
+Packages/
+xcuserdata/
+DerivedData/
+*.xcworkspace/
+*.xcuserstate
+
+# Private Credentials & Local Configs
+.env
+.env.*
+*.secret
+*.key
+*.pem
+*.p8
+*.p12
+*.cer
+*.jks
+*token*
+*credential*
+local.properties
+
+# Temporary & Scratch Files
+scratch/
+*.tmp
+*.log
+*.bak

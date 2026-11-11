@@ -1,0 +1,151 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0e17" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.95" />
+    </linearGradient>
+    <filter id="shadow2" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#000000" flood-opacity="0.55" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="720" rx="16" fill="url(#bg2)" stroke="#ffffff" stroke-opacity="0.1" />
+
+  <!-- Section Title -->
+  <text x="60" y="60" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="28" font-weight="700" fill="#ffffff">
+    ✦ Key Features in Action
+  </text>
+  <text x="60" y="88" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="14" font-weight="400" fill="#94a3b8">
+    Pure Native Apple Liquid-Glass Design with KaTeX LaTeX &amp; Syntax Highlighted Code Blocks
+  </text>
+
+  <!-- Card 1: AI Panel with KaTeX & Code Block (Large Left Card) -->
+  <g filter="url(#shadow2)" transform="translate(60, 120)">
+    <rect width="660" height="540" rx="18" fill="url(#panelGrad)" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.2" />
+
+    <!-- Header -->
+    <g transform="translate(24, 20)">
+      <circle cx="10" cy="10" r="10" fill="#3b82f6" fill-opacity="0.2" />
+      <text x="5" y="14" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#60a5fa">✦</text>
+      <text x="28" y="15" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-weight="600" fill="#ffffff">PopClick AI Assistant</text>
+
+      <!-- Expand and close badges -->
+      <rect x="520" y="0" width="28" height="22" rx="5" fill="#334155" fill-opacity="0.6" />
+      <text x="528" y="15" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#94a3b8">⤢</text>
+      <circle cx="575" cy="11" r="8" fill="#ef4444" fill-opacity="0.7" />
+    </g>
+
+    <line x1="0" y1="56" x2="660" y2="56" stroke="#ffffff" stroke-opacity="0.1" />
+
+    <!-- Content: Math Formula (KaTeX) -->
+    <g transform="translate(24, 76)">
+      <text x="0" y="16" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#38bdf8" letter-spacing="1">ORIGINAL SELECTION</text>
+      <rect x="0" y="24" width="612" height="34" rx="6" fill="#ffffff" fill-opacity="0.04" />
+      <text x="12" y="46" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#cbd5e1">设等价类为 $[a]_R = \{s \mid (a, s) \in R\}$，计算分布矩阵与积分公式。</text>
+    </g>
+
+    <!-- Content: AI Result with Formula & Code -->
+    <g transform="translate(24, 160)">
+      <text x="0" y="16" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#a855f7" letter-spacing="1">AI RESPONSE &amp; KATEX RENDERING</text>
+
+      <!-- Math Box -->
+      <rect x="0" y="26" width="612" height="90" rx="8" fill="#0f172a" stroke="#ffffff" stroke-opacity="0.08" />
+      <text x="20" y="52" font-family="'Times New Roman', serif" font-style="italic" font-size="18" fill="#f8fafc">
+        [a]<tspan font-size="12" dy="4">R</tspan><tspan font-size="18" dy="-4"> = { s | (a, s) ∈ R }</tspan>
+      </text>
+      <text x="20" y="94" font-family="'Times New Roman', serif" font-size="18" fill="#f8fafc">
+        ∫<tspan font-size="11" dy="6">0</tspan><tspan font-size="11" dy="-12">∞</tspan><tspan font-size="18" dy="6"> e</tspan><tspan font-size="11" dy="-8">-x</tspan><tspan font-size="18" dy="8"> dx = 1       A = </tspan>
+        <tspan font-size="24">(</tspan><tspan font-size="14"> 1  2 </tspan><tspan font-size="24">)</tspan>
+      </text>
+
+      <!-- Code Block Wrapper -->
+      <g transform="translate(0, 130)">
+        <rect width="612" height="150" rx="8" fill="#0b0f19" stroke="#ffffff" stroke-opacity="0.1" />
+        <!-- Code header -->
+        <rect width="612" height="28" rx="8" fill="#ffffff" fill-opacity="0.04" />
+        <text x="12" y="18" font-family="ui-monospace, monospace" font-size="10.5" font-weight="700" fill="#60a5fa">PYTHON</text>
+        <rect x="546" y="5" width="56" height="18" rx="4" fill="#ffffff" fill-opacity="0.08" />
+        <text x="554" y="17" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" fill="#cbd5e1">📋 Copy</text>
+
+        <!-- Code body -->
+        <text x="16" y="52" font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#fc5fa3" font-weight="600">def <tspan fill="#a167e6">evaluate_distribution</tspan><tspan fill="#f8fafc">(samples: list) -&gt; float:</tspan></text>
+        <text x="36" y="74" font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#6c7986"># Calculate partition probability</text>
+        <text x="36" y="96" font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#fc5fa3" font-weight="600">return <tspan fill="#a167e6">sum</tspan><tspan fill="#f8fafc">(x * </tspan><tspan fill="#d0bf69">0.5</tspan><tspan fill="#f8fafc"> </tspan><tspan fill="#fc5fa3">for</tspan><tspan fill="#f8fafc"> x </tspan><tspan fill="#fc5fa3">in</tspan><tspan fill="#f8fafc"> samples)</tspan></text>
+      </g>
+    </g>
+
+    <!-- Bottom Action Bar -->
+    <g transform="translate(24, 480)">
+      <rect width="70" height="28" rx="6" fill="#3b82f6" />
+      <text x="15" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#ffffff">📋 Copy</text>
+
+      <rect x="80" y="0" width="80" height="28" rx="6" fill="#2563eb" fill-opacity="0.4" stroke="#3b82f6" stroke-width="1" />
+      <text x="94" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#bfdbfe">⇄ Replace</text>
+
+      <rect x="170" y="0" width="70" height="28" rx="6" fill="#ffffff" fill-opacity="0.08" />
+      <text x="185" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="500" fill="#cbd5e1">↓ Insert</text>
+
+      <rect x="520" y="0" width="90" height="28" rx="6" fill="#ffffff" fill-opacity="0.06" />
+      <text x="532" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="500" fill="#94a3b8">⤢ Expand</text>
+    </g>
+  </g>
+
+  <!-- Card 2: Floating Bar (Right Top Card) -->
+  <g filter="url(#shadow2)" transform="translate(750, 120)">
+    <rect width="390" height="210" rx="16" fill="url(#panelGrad)" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.2" />
+    <text x="20" y="32" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="600" fill="#ffffff">⚡ Contextual Action Capsule</text>
+    <text x="20" y="52" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#94a3b8">Instantly pops up upon text selection without focus loss</text>
+
+    <!-- Mini Floating Capsule -->
+    <g transform="translate(20, 80)">
+      <rect width="350" height="46" rx="23" fill="#0f172a" stroke="#ffffff" stroke-opacity="0.2" stroke-width="1" />
+      <text x="16" y="27" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#cbd5e1">Copy</text>
+      <text x="68" y="27" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#cbd5e1">Search</text>
+      <text x="126" y="27" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#cbd5e1">Translate</text>
+      <rect x="194" y="8" width="54" height="28" rx="14" fill="#3b82f6" />
+      <text x="208" y="26" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#ffffff">✦ AI</text>
+      <text x="264" y="27" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#cbd5e1">JSON</text>
+      <text x="314" y="27" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#94a3b8">⋯</text>
+    </g>
+
+    <text x="20" y="165" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#34d399">✓ 0% Idle CPU footprint</text>
+    <text x="20" y="185" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#38bdf8">✓ Non-activating floating panel</text>
+  </g>
+
+  <!-- Card 3: Translation Panel (Right Bottom Card) -->
+  <g filter="url(#shadow2)" transform="translate(750, 360)">
+    <rect width="390" height="300" rx="16" fill="url(#panelGrad)" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.2" />
+    <g transform="translate(20, 24)">
+      <text x="0" y="14" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="600" fill="#ffffff">📖 Real-Time Translation</text>
+      <rect x="290" y="-2" width="60" height="22" rx="4" fill="#ffffff" fill-opacity="0.08" />
+      <text x="298" y="13" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10.5" fill="#38bdf8">🇺🇸 → 🇨🇳</text>
+    </g>
+
+    <!-- Source -->
+    <g transform="translate(20, 64)">
+      <text x="0" y="12" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="600" fill="#64748b">SOURCE</text>
+      <rect x="0" y="18" width="350" height="40" rx="6" fill="#ffffff" fill-opacity="0.04" />
+      <text x="10" y="42" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#94a3b8">"Empower your text workflows seamlessly."</text>
+    </g>
+
+    <!-- Target -->
+    <g transform="translate(20, 140)">
+      <text x="0" y="12" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="600" fill="#38bdf8">TRANSLATION</text>
+      <rect x="0" y="18" width="350" height="70" rx="6" fill="#0f172a" stroke="#ffffff" stroke-opacity="0.08" />
+      <text x="12" y="44" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="500" fill="#f8fafc">“无缝提升您的文本工作流效率。”</text>
+    </g>
+
+    <!-- Footer -->
+    <g transform="translate(20, 252)">
+      <rect width="64" height="26" rx="6" fill="#ffffff" fill-opacity="0.1" />
+      <text x="12" y="17" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#ffffff">Copy</text>
+      <rect x="74" y="0" width="76" height="26" rx="6" fill="#3b82f6" />
+      <text x="86" y="17" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#ffffff">Replace</text>
+    </g>
+  </g>
+</svg>

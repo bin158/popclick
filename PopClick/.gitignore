@@ -1,0 +1,20 @@
+# macOS System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Swift & Xcode Build Artifacts
+.build/
+*.build/
+*.app/
+*.dSYM/
+*.o
+*.pcm
+*.swiftmodule
+*.swiftdoc
+
+# Private Credentials & Local Configs
+.env
+*.secret
+*.key
+local.properties
