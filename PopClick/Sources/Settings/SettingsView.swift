@@ -379,7 +379,7 @@ struct ShortcutsSettingsTab: View {
             Section {
                 shortcutRow(label: loc.localized("Quick Copy", "极速复制"), shortcut: "⌘ C")
                 shortcutRow(label: loc.localized("Web Search", "网页搜索"), shortcut: "⌘ F")
-                shortcutRow(label: loc.localized("Open AI Assistant", "打开 AI 助手"), shortcut: "⌘ J")
+                shortcutRow(label: loc.localized("Open PopClick AI Agent", "打开 PopClick AI Agent"), shortcut: "⌘ J")
                 shortcutRow(label: loc.localized("Dismiss Toolbar", "关闭浮窗"), shortcut: "Esc")
             } header: {
                 Text(loc.localized("System Shortcuts", "常用快捷键"))

@@ -227,7 +227,7 @@ struct AIPanelView: View {
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundStyle(Color.accentColor)
 
-            Text("NOVA AI")
+            Text("PopClick AI Agent")
                 .font(DesignTokens.Typography.bodyMedium)
                 .foregroundStyle(.primary)
 

@@ -56,7 +56,7 @@ struct MoreMenuView: View {
                             .foregroundStyle(Color.accentColor)
                             .frame(width: 18)
 
-                        Text("Open AI Panel...")
+                        Text("PopClick AI Agent...")
                             .font(DesignTokens.Typography.bodyFont)
                             .foregroundStyle(.primary)
 
