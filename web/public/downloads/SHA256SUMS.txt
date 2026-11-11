@@ -1,0 +1,4 @@
+36cbd336f2ae2b870a390574cc61d1d0207c3a84aac155167d086e3c3b0dff60  PopClick-1.0.0.dmg
+36cbd336f2ae2b870a390574cc61d1d0207c3a84aac155167d086e3c3b0dff60  PopClick.dmg
+f168652bb8cbcafb7c1e6ed239504c4c1f4fde90db6cd96dc44da89fec6d4cfd  PopClick-1.0.0.zip
+f168652bb8cbcafb7c1e6ed239504c4c1f4fde90db6cd96dc44da89fec6d4cfd  PopClick.zip

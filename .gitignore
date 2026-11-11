@@ -34,12 +34,24 @@ DerivedData/
 *.p12
 *.cer
 *.jks
-*token*
-*credential*
+*.token
+*.credential
 local.properties
+
+# Whitelist all source files
+!PopClick/Sources/**
 
 # Temporary & Scratch Files
 scratch/
 *.tmp
 *.log
 *.bak
+dist/*.dmg
+dist/*.zip
+
+# Node & Next.js
+node_modules/
+.next/
+out/
+.turbo/
+npm-debug.log*
