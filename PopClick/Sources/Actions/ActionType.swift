@@ -15,11 +15,26 @@ enum ActionType: String, Identifiable, CaseIterable {
     case openURL
     case email
 
+    // Code Intelligence Actions
+    case codeExplain
+    case codeComment
+    case codeDoc
+    case codeFix
+    case codeRefactor
+    case codeOptimize
+    case codeTest
+    case codeSecurity
+    case formatCode
+
+    // Specialized Data Formats
+    case formatJSON
+    case validateJSON
+    case formatSQL
+
     // Text Utility Actions
     case uppercase
     case lowercase
     case capitalize
-    case formatJSON
     case removeLineBreaks
     case trimSpaces
     case urlEncode
@@ -41,10 +56,21 @@ enum ActionType: String, Identifiable, CaseIterable {
         case .share: return "Share"
         case .openURL: return "Open"
         case .email: return "Email"
+        case .codeExplain: return "Explain"
+        case .codeComment: return "Comment"
+        case .codeDoc: return "Doc"
+        case .codeFix: return "Fix"
+        case .codeRefactor: return "Refactor"
+        case .codeOptimize: return "Optimize"
+        case .codeTest: return "Test"
+        case .codeSecurity: return "Security"
+        case .formatCode: return "Format"
+        case .formatJSON: return "Format"
+        case .validateJSON: return "Validate"
+        case .formatSQL: return "Format"
         case .uppercase: return "UPPER"
         case .lowercase: return "lower"
         case .capitalize: return "Title"
-        case .formatJSON: return "JSON"
         case .removeLineBreaks: return "Unwrap"
         case .trimSpaces: return "Trim"
         case .urlEncode: return "Encode"
@@ -64,10 +90,21 @@ enum ActionType: String, Identifiable, CaseIterable {
         case .share: return "square.and.arrow.up"
         case .openURL: return "arrow.up.right.square"
         case .email: return "envelope"
+        case .codeExplain: return "lightbulb"
+        case .codeComment: return "text.bubble"
+        case .codeDoc: return "doc.text"
+        case .codeFix: return "wrench.and.screwdriver"
+        case .codeRefactor: return "arrow.triangle.branch"
+        case .codeOptimize: return "bolt.fill"
+        case .codeTest: return "flask"
+        case .codeSecurity: return "shield.checkerboard"
+        case .formatCode: return "text.alignleft"
+        case .formatJSON: return "curlybraces"
+        case .validateJSON: return "checkmark.seal"
+        case .formatSQL: return "cylinder.split.1x2"
         case .uppercase: return "textformat.size.larger"
         case .lowercase: return "textformat.size.smaller"
         case .capitalize: return "textformat"
-        case .formatJSON: return "curlybraces"
         case .removeLineBreaks: return "text.alignleft"
         case .trimSpaces: return "arrow.left.and.right.text.vertical"
         case .urlEncode: return "link.badge.plus"
@@ -81,6 +118,7 @@ enum ActionType: String, Identifiable, CaseIterable {
         case .copy: return "⌘C"
         case .search: return "⌘F"
         case .ai: return "⌘J"
+        case .codeExplain: return "⌘E"
         default: return nil
         }
     }

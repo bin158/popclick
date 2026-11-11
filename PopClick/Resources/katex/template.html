@@ -155,33 +155,68 @@
     font-size: 10.5px;
     font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   }
-  .code-block-copy-btn {
+  .code-block-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .code-block-btn {
     display: inline-flex;
     align-items: center;
     gap: 4px;
     background: transparent;
     border: 0.5px solid var(--border-color);
     border-radius: 4px;
-    padding: 2px 8px;
+    padding: 2px 7px;
     font-size: 10.5px;
     color: var(--text-color);
     cursor: pointer;
     opacity: 0.75;
     transition: all 0.15s ease;
   }
-  .code-block-copy-btn:hover {
+  .code-block-btn:hover {
     opacity: 1.0;
     background: rgba(0, 0, 0, 0.06);
   }
   @media (prefers-color-scheme: dark) {
-    .code-block-copy-btn:hover {
+    .code-block-btn:hover {
       background: rgba(255, 255, 255, 0.10);
     }
   }
-  .code-block-copy-btn.copied {
+  .code-block-btn.active {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+  }
+  .code-block-btn.copied {
     color: #34c759;
     border-color: #34c759;
     opacity: 1.0;
+  }
+  .code-editor-container {
+    display: flex;
+    align-items: stretch;
+    position: relative;
+    overflow-x: auto;
+  }
+  .code-line-numbers {
+    padding: 8px 6px 8px 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    text-align: right;
+    color: rgba(128, 128, 128, 0.45);
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    line-height: 1.5;
+    border-right: 0.5px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.015);
+    white-space: pre;
+    flex-shrink: 0;
+  }
+  @media (prefers-color-scheme: dark) {
+    .code-line-numbers {
+      background: rgba(255, 255, 255, 0.02);
+      color: rgba(255, 255, 255, 0.3);
+    }
   }
   pre {
     margin: 0 !important;
@@ -189,6 +224,16 @@
     border: none !important;
     background: transparent !important;
     overflow-x: auto;
+    flex-grow: 1;
+  }
+  pre.wrap-code {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-x: hidden !important;
+  }
+  pre.wrap-code code {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
   }
   pre code {
     background: transparent !important;
@@ -317,7 +362,7 @@
       }
     });
 
-    // 11. Format and highlight all Code Blocks with Language Badge & Copy Button
+    // 11. Format and highlight all Code Blocks with Language Badge, Line Numbers, Wrap Toggle & Copy Button
     const codeBlocksElements = content.querySelectorAll('pre code');
     codeBlocksElements.forEach((codeEl) => {
       const preEl = codeEl.parentElement;
@@ -340,6 +385,14 @@
         } catch (e) {}
       }
 
+      // Compute line count
+      const codeText = codeEl.innerText || codeEl.textContent || '';
+      const lineCount = (codeText.split('\n').length) || 1;
+      let lineNumsStr = '';
+      for (let i = 1; i <= lineCount; i++) {
+        lineNumsStr += i + (i < lineCount ? '\n' : '');
+      }
+
       // Create code block wrapper
       const wrapper = document.createElement('div');
       wrapper.className = 'code-block-wrapper';
@@ -351,16 +404,32 @@
       langSpan.className = 'code-block-lang';
       langSpan.textContent = lang;
 
+      const actionsDiv = document.createElement('div');
+      actionsDiv.className = 'code-block-actions';
+
+      // Word Wrap toggle button
+      const wrapBtn = document.createElement('button');
+      wrapBtn.className = 'code-block-btn';
+      wrapBtn.innerHTML = '⇄ Wrap';
+      wrapBtn.title = 'Toggle word wrap';
+      wrapBtn.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        preEl.classList.toggle('wrap-code');
+        const isWrapped = preEl.classList.contains('wrap-code');
+        wrapBtn.classList.toggle('active', isWrapped);
+        notifyHeight();
+      };
+
+      // Copy Button
       const copyBtn = document.createElement('button');
-      copyBtn.className = 'code-block-copy-btn';
+      copyBtn.className = 'code-block-btn';
       copyBtn.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy';
 
       copyBtn.onclick = function(e) {
         e.preventDefault();
         e.stopPropagation();
-        const codeText = codeEl.innerText || codeEl.textContent || '';
 
-        // Notify Swift host or navigator.clipboard
         if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.copyHandler) {
           window.webkit.messageHandlers.copyHandler.postMessage(codeText);
         } else if (navigator.clipboard) {
@@ -375,12 +444,24 @@
         }, 1600);
       };
 
+      actionsDiv.appendChild(wrapBtn);
+      actionsDiv.appendChild(copyBtn);
       header.appendChild(langSpan);
-      header.appendChild(copyBtn);
+      header.appendChild(actionsDiv);
+
+      // Code editor container holding line numbers and pre
+      const editorContainer = document.createElement('div');
+      editorContainer.className = 'code-editor-container';
+
+      const lineNumsEl = document.createElement('div');
+      lineNumsEl.className = 'code-line-numbers';
+      lineNumsEl.textContent = lineNumsStr;
 
       preEl.parentNode.insertBefore(wrapper, preEl);
       wrapper.appendChild(header);
-      wrapper.appendChild(preEl);
+      editorContainer.appendChild(lineNumsEl);
+      editorContainer.appendChild(preEl);
+      wrapper.appendChild(editorContainer);
     });
 
     // 12. Notify Swift of actual content height

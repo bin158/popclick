@@ -49,6 +49,15 @@ struct ActionExecutor {
             ClipboardManager.copy(transformed)
             TextReplacer.replaceSelectedText(with: transformed, keepOnClipboard: true)
 
+        case .formatSQL:
+            let transformed = TextTransformer.transform(text, kind: .formatSQL)
+            ClipboardManager.copy(transformed)
+            TextReplacer.replaceSelectedText(with: transformed, keepOnClipboard: true)
+
+        case .validateJSON:
+            let result = TextTransformer.transform(text, kind: .validateJSON)
+            ClipboardManager.copy(result)
+
         case .removeLineBreaks:
             let transformed = TextTransformer.transform(text, kind: .removeLineBreaks)
             TextReplacer.replaceSelectedText(with: transformed)
@@ -65,7 +74,9 @@ struct ActionExecutor {
             let transformed = TextTransformer.transform(text, kind: .base64Encode)
             TextReplacer.replaceSelectedText(with: transformed)
 
-        case .ai, .more:
+        case .ai, .more,
+             .codeExplain, .codeComment, .codeDoc, .codeFix,
+             .codeRefactor, .codeOptimize, .codeTest, .codeSecurity, .formatCode:
             // Intercepted and handled by FloatingBarController UI
             break
         }

@@ -140,6 +140,115 @@ final class AccessibilityManager {
         return nil
     }
 
+    /// Extracts rich contextual code information (application, window title, document URL, surrounding lines)
+    public func extractCodeContext(for selectedText: String) -> CodeContext {
+        guard let focusedApp = NSWorkspace.shared.frontmostApplication else {
+            let detection = CodeDetector.detect(text: selectedText)
+            return CodeContext(selectedCode: selectedText, detectedLanguage: detection.language)
+        }
+
+        let appName = focusedApp.localizedName
+        let bundleId = focusedApp.bundleIdentifier
+
+        let appElement = AXUIElementCreateApplication(focusedApp.processIdentifier)
+        var focusedWindowValue: CFTypeRef?
+        var documentPath: String?
+        var fileExtension: String?
+
+        // Check focused window for document URL or file path in title
+        if AXUIElementCopyAttributeValue(appElement, kAXFocusedWindowAttribute as CFString, &focusedWindowValue) == .success,
+           let windowElement = focusedWindowValue as! AXUIElement? {
+
+            // Try document attribute
+            var docValue: CFTypeRef?
+            if AXUIElementCopyAttributeValue(windowElement, kAXDocumentAttribute as CFString, &docValue) == .success,
+               let docStr = docValue as? String {
+                documentPath = docStr
+                if let url = URL(string: docStr) {
+                    fileExtension = url.pathExtension
+                } else {
+                    fileExtension = (docStr as NSString).pathExtension
+                }
+            }
+
+            // Fallback: search window title for file extension (e.g. "MainView.swift - MyApp")
+            if fileExtension == nil || fileExtension?.isEmpty == true {
+                var titleValue: CFTypeRef?
+                if AXUIElementCopyAttributeValue(windowElement, kAXTitleAttribute as CFString, &titleValue) == .success,
+                   let titleStr = titleValue as? String {
+                    let words = titleStr.components(separatedBy: CharacterSet(charactersIn: " —-–()[]\t"))
+                    for word in words {
+                        let trimmedWord = word.trimmingCharacters(in: .whitespaces)
+                        if trimmedWord.contains(".") {
+                            let ext = (trimmedWord as NSString).pathExtension.lowercased()
+                            if !ext.isEmpty && ext.count <= 6 {
+                                fileExtension = ext
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Try extracting surrounding code from focused text element
+        var focusedElementValue: CFTypeRef?
+        var surroundingBefore: String?
+        var surroundingAfter: String?
+        var fullFile: String?
+
+        if AXUIElementCopyAttributeValue(appElement, kAXFocusedUIElementAttribute as CFString, &focusedElementValue) == .success,
+           let element = focusedElementValue as! AXUIElement? {
+
+            var fullValue: CFTypeRef?
+            if AXUIElementCopyAttributeValue(element, kAXValueAttribute as CFString, &fullValue) == .success,
+               let fullString = fullValue as? String {
+                fullFile = fullString
+                let nsString = fullString as NSString
+
+                var rangeValue: CFTypeRef?
+                if AXUIElementCopyAttributeValue(element, kAXSelectedTextRangeAttribute as CFString, &rangeValue) == .success,
+                   let rVal = rangeValue {
+                    var range = CFRange()
+                    if AXValueGetValue(rVal as! AXValue, .cfRange, &range), range.location >= 0 {
+                        // Extract lines before
+                        let beforeLength = min(range.location, 1200)
+                        let beforeStart = range.location - beforeLength
+                        if beforeStart >= 0 {
+                            let beforeSub = nsString.substring(with: NSRange(location: beforeStart, length: beforeLength))
+                            let beforeLines = beforeSub.components(separatedBy: .newlines)
+                            surroundingBefore = beforeLines.suffix(8).joined(separator: "\n")
+                        }
+
+                        // Extract lines after
+                        let selEnd = range.location + range.length
+                        if selEnd <= nsString.length {
+                            let afterLength = min(nsString.length - selEnd, 1200)
+                            let afterSub = nsString.substring(with: NSRange(location: selEnd, length: afterLength))
+                            let afterLines = afterSub.components(separatedBy: .newlines)
+                            surroundingAfter = afterLines.prefix(8).joined(separator: "\n")
+                        }
+                    }
+                }
+            }
+        }
+
+        let detection = CodeDetector.detect(text: selectedText, fileExtension: fileExtension, appName: appName)
+
+        return CodeContext(
+            selectedCode: selectedText,
+            surroundingBefore: surroundingBefore,
+            surroundingAfter: surroundingAfter,
+            fullFileContent: fullFile,
+            appName: appName,
+            appBundleId: bundleId,
+            filePath: documentPath,
+            fileExtension: fileExtension,
+            detectedLanguage: detection.language,
+            contextMode: .selectionOnly
+        )
+    }
+
     private func getSelectedTextViaClipboard() -> String? {
         let pasteboard = NSPasteboard.general
         let previousContents = pasteboard.string(forType: .string)

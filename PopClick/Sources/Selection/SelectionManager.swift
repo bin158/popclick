@@ -87,12 +87,14 @@ final class SelectionManager {
             height: 20
         )
 
-        let contentType = TextSelection.detectContentType(text)
+        let codeContext = accessibilityManager.extractCodeContext(for: text)
+        let contentType = TextSelection.detectContentType(text, context: codeContext)
         let selection = TextSelection(
             text: text,
             bounds: bounds,
             mouseLocation: mouseLocation,
-            contentType: contentType
+            contentType: contentType,
+            codeContext: codeContext
         )
 
         onSelection?(selection)

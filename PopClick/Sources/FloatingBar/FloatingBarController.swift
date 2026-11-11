@@ -124,7 +124,58 @@ final class FloatingBarController {
 
         case .ai:
             dismiss(animated: false)
-            aiPanelController.show(for: selection.text, anchorBounds: selection.bounds)
+            aiPanelController.show(for: selection.text, anchorBounds: selection.bounds, codeContext: selection.codeContext, initialAction: nil)
+
+        case .codeExplain:
+            dismiss(animated: false)
+            aiPanelController.show(for: selection.text, anchorBounds: selection.bounds, codeContext: selection.codeContext, initialAction: .explain)
+
+        case .codeComment:
+            dismiss(animated: false)
+            aiPanelController.show(for: selection.text, anchorBounds: selection.bounds, codeContext: selection.codeContext, initialAction: .comment)
+
+        case .codeDoc:
+            dismiss(animated: false)
+            aiPanelController.show(for: selection.text, anchorBounds: selection.bounds, codeContext: selection.codeContext, initialAction: .documentation)
+
+        case .codeFix:
+            dismiss(animated: false)
+            aiPanelController.show(for: selection.text, anchorBounds: selection.bounds, codeContext: selection.codeContext, initialAction: .fix)
+
+        case .codeRefactor:
+            dismiss(animated: false)
+            aiPanelController.show(for: selection.text, anchorBounds: selection.bounds, codeContext: selection.codeContext, initialAction: .refactor)
+
+        case .codeOptimize:
+            dismiss(animated: false)
+            aiPanelController.show(for: selection.text, anchorBounds: selection.bounds, codeContext: selection.codeContext, initialAction: .optimize)
+
+        case .codeTest:
+            dismiss(animated: false)
+            aiPanelController.show(for: selection.text, anchorBounds: selection.bounds, codeContext: selection.codeContext, initialAction: .generateTest)
+
+        case .codeSecurity:
+            dismiss(animated: false)
+            aiPanelController.show(for: selection.text, anchorBounds: selection.bounds, codeContext: selection.codeContext, initialAction: .securityReview)
+
+        case .formatCode:
+            dismiss(animated: false)
+            aiPanelController.show(for: selection.text, anchorBounds: selection.bounds, codeContext: selection.codeContext, initialAction: .format)
+
+        case .validateJSON:
+            let validationMsg = TextTransformer.transform(selection.text, kind: .validateJSON)
+            currentViewModel?.triggerFeedback(message: validationMsg)
+            ActionExecutor.execute(action, with: selection.text, anchorView: panel?.contentView)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [weak self] in
+                self?.dismiss(animated: true)
+            }
+
+        case .formatSQL:
+            currentViewModel?.triggerFeedback(message: "SQL Formatted")
+            ActionExecutor.execute(action, with: selection.text, anchorView: panel?.contentView)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.85) { [weak self] in
+                self?.dismiss(animated: true)
+            }
 
         case .more:
             if popoverPanel != nil {
@@ -168,7 +219,7 @@ final class FloatingBarController {
             },
             onOpenAI: { [weak self] in
                 self?.dismiss(animated: false)
-                self?.aiPanelController.show(for: selection.text, anchorBounds: selection.bounds)
+                self?.aiPanelController.show(for: selection.text, anchorBounds: selection.bounds, codeContext: selection.codeContext)
             },
             onDismiss: { [weak self] in
                 self?.dismissPopover()

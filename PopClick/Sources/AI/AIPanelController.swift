@@ -7,10 +7,19 @@ final class AIPanelController {
     private var panel: NSPanel?
     private var hostingView: NSHostingView<AIPanelView>?
 
-    func show(for text: String, anchorBounds: CGRect) {
+    func show(
+        for text: String,
+        anchorBounds: CGRect,
+        codeContext: CodeContext? = nil,
+        initialAction: AIService.AIAction? = nil
+    ) {
         dismiss()
 
-        let viewModel = AIPanelViewModel(originalText: text) { [weak self] in
+        let viewModel = AIPanelViewModel(
+            originalText: text,
+            codeContext: codeContext,
+            initialAction: initialAction
+        ) { [weak self] in
             self?.dismiss()
         }
 

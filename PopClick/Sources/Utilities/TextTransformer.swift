@@ -10,6 +10,8 @@ struct TextTransformer {
         case removeLineBreaks = "Remove Line Breaks"
         case trimSpaces = "Trim Spaces"
         case formatJSON = "Format JSON"
+        case validateJSON = "Validate JSON"
+        case formatSQL = "Format SQL"
         case urlEncode = "URL Encode"
         case urlDecode = "URL Decode"
         case base64Encode = "Base64 Encode"
@@ -25,6 +27,8 @@ struct TextTransformer {
             case .removeLineBreaks: return "text.alignleft"
             case .trimSpaces: return "arrow.left.and.right.text.vertical"
             case .formatJSON: return "curlybraces"
+            case .validateJSON: return "checkmark.seal"
+            case .formatSQL: return "cylinder.split.1x2"
             case .urlEncode: return "link.badge.plus"
             case .urlDecode: return "link"
             case .base64Encode: return "lock.shield"
@@ -58,6 +62,13 @@ struct TextTransformer {
 
         case .formatJSON:
             return formatJSONString(text)
+
+        case .validateJSON:
+            let result = validateJSONString(text)
+            return result.message
+
+        case .formatSQL:
+            return formatSQLString(text)
 
         case .urlEncode:
             var allowed = CharacterSet.urlQueryAllowed
@@ -213,6 +224,67 @@ struct TextTransformer {
         }
 
         return raw
+    }
+
+    /// Validates JSON string syntax and returns validation status message
+    static func validateJSONString(_ raw: String) -> (isValid: Bool, message: String) {
+        let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let data = trimmed.data(using: .utf8) else {
+            return (false, "Invalid UTF-8 Encoding")
+        }
+        do {
+            _ = try JSONSerialization.jsonObject(with: data, options: [.fragmentsAllowed])
+            return (true, "Valid JSON (格式正确)")
+        } catch {
+            return (false, "JSON Error: \(error.localizedDescription)")
+        }
+    }
+
+    /// Formats SQL with capitalized keywords and aligned major clauses
+    static func formatSQLString(_ raw: String) -> String {
+        var text = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        if text.isEmpty { return raw }
+
+        let majorClauses = [
+            "SELECT", "FROM", "WHERE", "INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "FULL JOIN",
+            "CROSS JOIN", "JOIN", "ON", "GROUP BY", "ORDER BY", "HAVING", "LIMIT", "OFFSET",
+            "INSERT INTO", "VALUES", "UPDATE", "SET", "DELETE FROM", "UNION ALL", "UNION"
+        ]
+
+        let keywords = [
+            "AND", "OR", "NOT", "IN", "IS NULL", "IS NOT NULL", "LIKE", "BETWEEN",
+            "EXISTS", "AS", "DISTINCT", "CASE", "WHEN", "THEN", "ELSE", "END",
+            "COUNT", "SUM", "AVG", "MIN", "MAX", "COALESCE", "ASC", "DESC",
+            "BY", "INTO", "TABLE", "CREATE", "DROP", "ALTER", "PRIMARY KEY", "FOREIGN KEY"
+        ]
+
+        for kw in (majorClauses + keywords) {
+            let pattern = "\\b(?i)\(kw)\\b"
+            if let regex = try? NSRegularExpression(pattern: pattern) {
+                text = regex.stringByReplacingMatches(
+                    in: text,
+                    range: NSRange(text.startIndex..., in: text),
+                    withTemplate: kw
+                )
+            }
+        }
+
+        for clause in majorClauses {
+            if clause == "SELECT" || clause == "INSERT INTO" || clause == "UPDATE" || clause == "CREATE" {
+                continue
+            }
+            let pattern = "\\s+\\b\(clause)\\b"
+            if let regex = try? NSRegularExpression(pattern: pattern) {
+                text = regex.stringByReplacingMatches(
+                    in: text,
+                    range: NSRange(text.startIndex..., in: text),
+                    withTemplate: "\n\(clause)"
+                )
+            }
+        }
+
+        let lines = text.components(separatedBy: .newlines).map { $0.trimmingCharacters(in: .whitespaces) }.filter { !$0.isEmpty }
+        return lines.joined(separator: "\n")
     }
 
     /// Computes basic statistics on text
