@@ -1,4 +1,4 @@
-# ✦ PopClick (NOVA)
+# ✦ PopClick (PopClick AI Agent)
 > **A high-end, ultra-modern macOS text action launcher.**
 > Handcrafted with native AppKit, SwiftUI & Swift Concurrency. Strictly following Apple Human Interface Guidelines.
 
@@ -9,7 +9,7 @@
 PopClick is a native macOS productivity tool that elevates text selection into an immediate, fluid, and delightful experience.
 
 ```text
-Select Text in ANY App ──> Floating Glass Capsule ──> Instant Action / AI ──> Seamless Replace or Copy
+Select Text in ANY App ──> Floating Glass Capsule ──> Instant Action / PopClick AI Agent ──> Seamless Replace or Copy
 ```
 
 ### Core Tenets
@@ -86,10 +86,12 @@ PopClick/
 
 ### 2. Context-Aware Action Engine
 PopClick analyzes the selected string in real-time and surfaces the most relevant actions:
-- **Plain Text**: `Copy`, `Search`, `Translate`, `AI`, `More (⋯)`
+- **Plain Text**: `Copy`, `Search`, `Translate`, `AI (PopClick AI Agent)`, `More (⋯)`
+- **Code**: `Copy`, `Explain`, `Comment`, `Fix`, `Refactor`, `AI`, `More (⋯)`
+- **JSON**: `Copy`, `Format`, `Validate`, `Explain`, `AI`
+- **SQL**: `Copy`, `Format`, `Explain`, `Optimize`, `AI`
 - **URLs**: `Open`, `Copy`, `Share`, `AI`, `More (⋯)`
 - **Email Addresses**: `Email`, `Copy`, `AI`, `More (⋯)`
-- **Code / JSON**: `Copy`, `Format JSON`, `AI`, `More (⋯)`
 - **Numbers**: `Copy`, `Search`, `AI`, `More (⋯)`
 
 ### 3. Native Text Utilities
@@ -104,19 +106,22 @@ Access instantly via the `⋯ More` glass popover:
 - Native speech synthesis (`NSSpeechSynthesizer`)
 - Native system share sheet (`NSSharingServicePicker`)
 
-### 4. Apple-Native AI Assistant & In-Place Replacement
-Clicking the `✦ AI` button opens the minimalist AI modal:
+### 4. Apple-Native PopClick AI Agent & In-Place Replacement
+Clicking the `✦ AI` button or code action opens the minimalist **PopClick AI Agent** modal:
 - **Preset Actions**: Rewrite, Summarize, Translate, Fix Grammar, Explain, Professional Tone.
-- **Custom Instructions**: Free-form natural language prompt ("Make this sound like a polite email").
+- **Code Intelligence Actions**: Explain, Comment, Documentation, Fix, Refactor, Optimize, Generate Test, Security Review, Format.
+- **Diff & Code Viewers**: Unified LCS line-by-line diff with line numbers and word wrap toggle (`Wrap / Scroll`).
+- **Custom Instructions**: Free-form natural language prompt ("Make this sound like a polite email" or "Refactor to async/await").
 - **Multi-Provider Engine**:
+  - Google Gemini (`gemini-flash-lite-latest`)
   - OpenAI (`gpt-4o-mini`, `gpt-4o`)
   - Anthropic Claude (`claude-3-5-sonnet`)
   - Local Ollama (`llama3.2`, etc.)
   - Custom API compatible endpoints
-  - **Zero-Config Intelligent Fallback**: Functions immediately out-of-the-box without requiring an API key.
-- **AI Result Actions**:
-  - **Copy**: Places output onto clipboard.
-  - **Replace**: Uses synthesized `⌘V` to replace selected text directly in the active app.
+  - **Zero-Config Intelligent Fallback**: Functions immediately out-of-the-box with built-in smart simulation.
+- **PopClick AI Agent Output Actions**:
+  - **Copy**: Places output or clean code onto clipboard.
+  - **Replace Selection**: Strictly replaces the selected code or text directly in the active app without altering surrounding code.
   - **Insert**: Appends output after current selection.
   - **Retry**: Re-runs prompt with modified parameters.
 

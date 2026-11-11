@@ -48,21 +48,24 @@
 
 ### 1. ⚡ Context-Aware Floating Action Capsule
 - **Dynamic Semantics**: Analyzes selected text in real-time to surface optimal actions:
-  - **Plain Text**: `Copy`, `Search`, `Translate`, `AI`, `More (⋯)`
-  - **Code & JSON**: `Copy`, `Format JSON`, `AI`, `More (⋯)`
+  - **Plain Text**: `Copy`, `Search`, `Translate`, `AI (PopClick AI Agent)`, `More (⋯)`
+  - **Code**: `Copy`, `Explain`, `Comment`, `Fix`, `Refactor`, `AI`, `More (⋯)`
+  - **JSON**: `Copy`, `Format`, `Validate`, `Explain`, `AI`
+  - **SQL**: `Copy`, `Format`, `Explain`, `Optimize`, `AI`
   - **URLs**: `Open URL`, `Copy`, `Share`, `AI`, `More (⋯)`
   - **Emails**: `Email`, `Copy`, `AI`, `More (⋯)`
 - **Native Liquid-Glass Material**: True macOS Sequoia/Tahoe specular border highlights, vibrancy blur, and SF Pro typography.
 - **Intelligent Collision Avoidance**: Automatically calculates screen edges, dock, and menu bar boundaries to flip and position smoothly on multi-display setups.
 
-### 2. 🤖 Intelligent AI Assistant & Enlarged Reader View
+### 2. 🤖 PopClick AI Agent & Enlarged Reader View
 - **Multi-Model Provider Pool**: Built-in support for **DeepSeek**, **Google Gemini**, **OpenAI (GPT-4o)**, **Anthropic Claude**, and local **Ollama** (offline LLMs).
+- **Code Intelligence Suite**: Explain code, generate native comments/docstrings, fix bugs, refactor, optimize performance, write unit tests, security audits, and visual LCS Diff comparison.
 - **Enlarged Reading Canvas**:
   - **Standard Mode (580px × 480px)**: 2.1x larger default reading viewport so formulas and paragraphs never feel cramped.
   - **Expanded Mode (760px × 680px)**: One-click expansion into a spacious reader window for long-form essays, research papers, and complex code.
   - **Persistent Preferences**: Remembers your preferred window size automatically.
   - **Edge-Resizable**: Borderless resizable panel allows custom window dragging.
-- **Direct Output Actions**: One-click `Copy`, `Replace Selection` (via synthesized ⌘V), or `Insert After`.
+- **Direct Output Actions**: One-click `Copy`, `Replace Selection` (strictly replaces selected code in active app), or `Insert After`.
 
 ### 3. ∑ 100% Offline KaTeX LaTeX Mathematical Typesetting
 - **Academic-Grade Typography**: Renders LaTeX math expressions natively with full Apple subpixel anti-aliasing.
